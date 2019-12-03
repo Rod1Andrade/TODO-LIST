@@ -29,9 +29,7 @@ class UserDao
 
         echo 'HERE...<br />';
         $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
-        
-        var_dump($conn);
-
+    
         $sql = new Insert;
         $sql->setEntity('User');
 

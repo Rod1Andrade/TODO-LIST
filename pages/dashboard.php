@@ -7,21 +7,25 @@
         header('location: /');
     }
 
-
-    include_once '../configs/autoload.php';
+    include_once '/var/www/html/TODO-LIST/configs/autoload.php';
 
     // use php\model\User;
     use php\dao\UserDao;
     use php\dao\TaskDao;
+    use php\model\User;
 
     $userDao = new UserDao();
     $taskDao = new TaskDao();
-
+    
+    $user = new User;
     $user = unserialize($_SESSION['user']);
     // $tasks = $taskDao->getAll($user);
 
-?>
+    
+    $userName = "{$user->getName()} {$user->getLastName()}";
+    
 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -41,7 +45,7 @@
                     <img src="../img/Users-images/<?=$user->getImageProfile()?>.png">
                 </div><!--infos-pessoais--img-->
                 <div class="infos-pessoais-nome">
-                    <p><?=$user->getName()?></p>
+                    <p><?=$userName?></p>
                 </div><!--infos-pessoais--nome-->
                 <div class="menu">
                     <div class="menu-content">
@@ -98,7 +102,7 @@
             <div id="main-section">
                 <div id="element-section">
                     <?php 
-                        foreach($tasks as $line){
+                        foreach($tasks as $line):
                     ?>
                     <div class="main-section-task">
                             <div class="main-section-task-left-image">
@@ -127,7 +131,7 @@
                     </div><!--main-section--task-->
 
                     <?php 
-                        }// Fim do Foreach
+                        endforeach;// Fim do Foreach
                     ?>
 
                 </div><!--element-section-->

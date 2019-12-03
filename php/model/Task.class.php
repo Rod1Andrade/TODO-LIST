@@ -51,10 +51,10 @@ class Task{
 
     public function setImportant($important){
         if($important == "true"){
-            $this->important = "true";
+            $this->important =  true;
         }
         else{
-            $this->important = "false";
+            $this->important = false;
         }
     }
 

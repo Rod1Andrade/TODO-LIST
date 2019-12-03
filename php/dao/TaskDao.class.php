@@ -8,6 +8,7 @@ use php\model\Task;
 
 use PDO;
 use PDOException;
+use php\ado\Insert;
 
 /**
  * @author: Rodrigo Andrade
@@ -26,22 +27,20 @@ class TaskDao
         $conn = Connection::open('../../configs/DB.ini');
         $sql = "INSERT INTO task (title, description, status, idUser, isImportant) VALUES (:title, :description, :status, :idUser, :isImportant)";
 
+        $sql = new Insert;
+        $sql->setEntity('Task');
+
+        $sql->setRowData('title', $task->getTitle());
+        $sql->setRowData('description', $task->getDescription());
+        $sql->setRowData('status', $task->getStatus());
+        $sql->setRowData('isImportant', $task->getImportant());
+        $sql->setRowData('dateStart', 'none');
+        $sql->setRowData('dateEnd', 'none');
+        $sql->setRowData('idUser', $task->getIdUser());
+        
         try
         {
-
-            $title = $task->getTitle();
-            $description = $task->getDescription();
-            $status = $task->getStatus();
-            $idUser = $task->getIdUser();
-            $isImportant = $task->getImportant();
-
-            $statement = $conn->prepare($sql);
-            $statement->bindParam(':title', $title);
-            $statement->bindParam(':description', $description);
-            $statement->bindParam(':status', $status);
-            $statement->bindParam(':idUser', $idUser);
-            $statement->bindParam(':isImportant', $isImportant);
-
+            $statement = $conn->prepare($sql);   
             $statement->execute();
 
         }
