@@ -85,7 +85,8 @@
                                 <input type="hidden" name="idUser" value="<?=$user->getId()?>">
                                 <input type="text" name="title" placeholder="Titulo" class="field">
                                 <label class="label-task">Importante: </label><input type="radio" name="important" value="true" class="field-radio"><br>
-                                <label class="label-task">Data de conclusão: </label><input type="date" name="data-conclusao">
+                                <label><input type="hidden" name="startDate" value="<?=date('Y/m/d')?>"></label>
+                                <label class="label-task">Data de conclusão: </label><input type="date" min="<?=date('Y/m/d')?>" name="data-conclusao">
                                 <input type="hidden" name="status" value="Andamento">
                                 <textarea class="textarea-field" placeholder="Descrição" maxlength="99" name="description"></textarea>
                                 <input type="submit" value="Adicionar" name="btn-adcionar-task" class="task-btn" onclick="hiddenDiv()">
