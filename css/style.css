@@ -219,6 +219,7 @@ textarea:focus, input:focus, select:focus, button:focus {
 .field-select
 {
     margin-top: 5px;
+    margin-bottom: 10px;
     width: 100%;
     font-size: 18px;
 }
@@ -258,7 +259,7 @@ textarea:focus, input:focus, select:focus, button:focus {
 
 /* NEW TASK SPACE */
 #container-newTask{
-    display: flex;
+    display: none;
     margin-top: 20px;
     padding: 10px;
     padding-left: 10px;

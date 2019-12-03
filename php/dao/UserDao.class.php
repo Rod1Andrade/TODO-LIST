@@ -26,8 +26,6 @@ class UserDao
      */
     public function createUser(User $user)
     {
-
-        echo 'HERE...<br />';
         $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
     
         $sql = new Insert;
@@ -72,8 +70,6 @@ class UserDao
         // Encode Hash para a senha: 
         $password = sha1($password);
 
-        // $sql = "SELECT * FROM User WHERE (email = :email AND password = :password)";
-
         $sql = new Select;
         $sql->setEntity('User');
         $sql->addColumn('*');
@@ -83,8 +79,6 @@ class UserDao
         $Criteria->add(new Filter('password', '=', $password), Expression::AND_OPERATOR);
 
         $sql->setCriteria($Criteria);
-
-        // echo 'SQL: '.$sql->getInstruction().'<br />';
         
         try{
 
@@ -103,8 +97,6 @@ class UserDao
                 $user->setSexo($row["sex"]);
                 $user->setImageProfile($row["imageProfile"]);
             }
-
-            // print_r($user);
 
         }catch(PDOException $e)
         {

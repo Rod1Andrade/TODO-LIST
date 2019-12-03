@@ -40,8 +40,6 @@ class Connection
         $type   = isset($db['type']) ? $db['type'] : 'NULL';    
         $port   = isset($db['port']) ? $db['port'] : 'NULL';  
 
-        // var_dump($db);
-
         switch($type)
         {   
             case 'mysql':
@@ -61,8 +59,6 @@ class Connection
 
         # Define que o PDO lance exceções em caso de erro:
         self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        var_dump(self::$connection);
 
         return self::$connection;
         
