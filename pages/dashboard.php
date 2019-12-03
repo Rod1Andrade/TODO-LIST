@@ -9,7 +9,6 @@
 
     include_once '/var/www/html/TODO-LIST/configs/autoload.php';
 
-    // use php\model\User;
     use php\dao\UserDao;
     use php\dao\TaskDao;
     use php\model\User;
@@ -52,10 +51,15 @@
                         <img src="../img/verificado.png">
                         <p>Tarefas</p>
                     </div>
+                    <!--
+
                     <div class="menu-content">
                         <img src="../img/cronometro.png">
                         <p>Importantes</p>
                     </div>
+                    
+                    -->
+
                     <div class="menu-content">
                         <img src="../img/calendario-main.png">
                         <p>Planejadas</p>
@@ -64,6 +68,7 @@
                         <img src="../img/folder.png">
                         <p>Concluidas</p>
                     </div>
+
                     <div class="menu-content">
                         <img src="../img/sair.png">
                         <p><a href="../php/controller/LogoutController.php">Logout</a></p>
