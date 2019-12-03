@@ -26,7 +26,8 @@
                 </div><!--Panel-criar-texto-->
                 <div class="Panel-criar-form">
                     <form action="newAccount-part2.php" method="POST" name="Panel-criar-form">
-                        <input type="text" name="name" class="Panel-criar-field" placeholder="Nome Completo">
+                        <input type="text" name="name" class="Panel-criar-field" placeholder="Primeiro Nome">
+                        <input type="text" name="lastName" class="Panel-criar-field" placeholder="Último Nome">
                         <input type="text" name="nickName" class="Panel-criar-field" placeholder="Nickname">
                         <input type="mail" name="email" class="Panel-criar-field" placeholder="Email">
                         <input type="password" name="password" class="Panel-criar-field" placeholder="Senha">

@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-include '../database/Connection.php';
-include '../model/User.php';
-include '../dao/UserDao.php';
+include_once '/var/www/html/TODO-LIST/configs/autoload.php';
 
+use php\dao\UserDao;
+use php\model\User;
 /**
  * Autenticação do Email
  */
@@ -62,7 +62,7 @@ function loginAuth()
     else
     {
         echo "<script type='text/javascript'>";
-        echo "location.href='/TODO-LIST/pages/dashboard.php'";
+        echo "location.href='/TODO-LIST/pages/login.php'";
         echo "</script>";
     }
 }
@@ -73,6 +73,7 @@ function redirectAuth(User $user){
         echo "<script type='text/javascript'>";
         echo "location.href='/TODO-LIST/pages/dashboard.php'";
         echo "</script>";
+        return true;
     }
     else
     {

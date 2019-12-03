@@ -1,4 +1,7 @@
 <?php
+
+namespace php\model;
+
 /**
  * @author: Rodrigo Andrade
  */

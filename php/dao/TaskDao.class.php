@@ -1,4 +1,14 @@
 <?php 
+
+namespace php\dao;
+
+use php\ado\Connection;
+use php\model\User;
+use php\model\Task;
+
+use PDO;
+use PDOException;
+
 /**
  * @author: Rodrigo Andrade
  */
@@ -13,7 +23,7 @@ class TaskDao
     public function createTask(Task $task)
     {
 
-        $conn = Connection::getInstance();
+        $conn = Connection::open('../../configs/DB.ini');
         $sql = "INSERT INTO task (title, description, status, idUser, isImportant) VALUES (:title, :description, :status, :idUser, :isImportant)";
 
         try
@@ -54,7 +64,7 @@ class TaskDao
 
         $tasks = array();
 
-        $conn = Connection::getInstance();
+        $conn = Connection::open('../../configs/DB.ini');
         $sql = "SELECT * from task WHERE idUser = :idUser";
 
         try
@@ -108,7 +118,7 @@ class TaskDao
     public function getTaskById($idTask, User $user)
     {
 
-        $conn = Connection::getInstance();
+        $conn = Connection::open('../../configs/DB.ini');
         $sql = "SELECT title, description FROM task WHERE idTask = :idTask AND idUser = :idUser";
 
         $task = new Task();

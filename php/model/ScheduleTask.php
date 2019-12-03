@@ -1,6 +1,6 @@
 <?php
-// Import Files: 
-include_once 'Task.php';
+
+namespace php\model;
 
 class ScheduleTask extends Task{
     

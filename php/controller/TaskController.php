@@ -1,8 +1,6 @@
 <?php
 
-require_once '../database/Connection.php';
-require_once '../model/Task.php';
-require_once '../dao/TaskDao.php';
+include_once '../configs/autoload.php';
 
 function createTaskController()
 {

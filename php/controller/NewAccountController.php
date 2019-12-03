@@ -1,36 +1,35 @@
 <?php
 
-include_once '../database/Connection.php';
-include_once '../model/User.php';
-include_once '../dao/UserDao.php';
+include_once '/var/www/html/TODO-LIST/configs/autoload.php';
+
+// phpinfo();
+
+error_reporting(E_ALL); 
+
+use php\model\User;
+use php\dao\UserDao;
 
 $name = $_REQUEST['_name'];
+$lastName = $_REQUEST['_lastName'];
 $nickName = $_REQUEST['_nickName'];
 $email = $_REQUEST['_email'];
 $password = $_REQUEST['_password'];
 $sexo = $_REQUEST['sexo'];
 $imageProfile = $_REQUEST['image-profile'];
 
-
-echo $name.'<br />';
-echo $nickName.'<br />';
-echo $email.'<br />';
-echo $password.'<br />';
-echo $imageProfile.'<br />';
-
+$userDao = new UserDao;
 $user = new User;
+
 $user->setName($name);
+$user->setLastName($lastName);
 $user->setNickname($nickName);
 $user->setEmail($email);
 $user->setPassword($password);
 $user->setSexo($sexo);
 $user->setImageProfile($imageProfile);
 
-$userDao = new UserDao;
-
-// var_dump($user);
-
 $userDao->createUser($user);
+
 
 echo "<script type='text/javascript'>";
 // echo "document.alert('Cadastrado com sucesso')";

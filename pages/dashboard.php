@@ -8,13 +8,17 @@
     }
 
 
-    include '../php/autoload.php';
+    include_once '../configs/autoload.php';
+
+    // use php\model\User;
+    use php\dao\UserDao;
+    use php\dao\TaskDao;
 
     $userDao = new UserDao();
     $taskDao = new TaskDao();
 
     $user = unserialize($_SESSION['user']);
-    $tasks = $taskDao->getAll($user);
+    // $tasks = $taskDao->getAll($user);
 
 ?>
 

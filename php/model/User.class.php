@@ -1,4 +1,7 @@
 <?php 
+
+namespace php\model;
+
 /**
  * @author: Rodrigo Andrade
  */
@@ -6,6 +9,7 @@ class User{
 
     private $id;
     private $name;
+    private $lastName;
     private $nickname;
     private $email;
     private $password;
@@ -24,6 +28,17 @@ class User{
     }
 
     public function getName() { return $this->name; }
+
+    public function setLastName($lastName)
+    {
+        $lastName = trim($lastName);
+        $this->lastName = $lastName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
 
     public function setNickname($nickname){
         // if(strlen($nickname) <= 8)
@@ -44,7 +59,7 @@ class User{
     public function setPassword($password){
 
         // if(strlen($password) >= 6 && strlen($password) <= 18) VALIDAÇÂO PENDENTE
-            $this->password = sha1($password);
+        $this->password = sha1($password);
         
         if(strlen($password) >= 40)
             $this->password = $password;

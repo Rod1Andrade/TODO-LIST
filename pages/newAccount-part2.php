@@ -19,6 +19,7 @@
                 <!-- <h1><?=$_REQUEST['name']?></h1> -->
                 <form action="../php/controller/NewAccountController.php" name="concluir" method="POST">
                     <input type="hidden" name="_name" value="<?=$_REQUEST['name']?>">
+                    <input type="hidden" name="_lastName" value="<?=$_REQUEST['lastName']?>">
                     <input type="hidden" name="_nickName" value="<?=$_REQUEST['nickName']?>">
                     <input type="hidden" name="_email" value="<?=$_REQUEST['email']?>">
                     <input type="hidden" name="_password" value="<?=$_REQUEST['password']?>">
@@ -58,6 +59,6 @@
         </div><!--Panel-Criar-conta-->
     </div>
 
-    <script src="../js/CreateAccountScript.js"></script>
+    <script src="../js/createAccountScript.js"></script>
 </body>
 </html>
