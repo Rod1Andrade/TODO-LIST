@@ -25,7 +25,7 @@ class TaskDao
     {
 
         $conn = Connection::open('../../configs/DB.ini');
-        $sql = "INSERT INTO task (title, description, status, idUser, isImportant) VALUES (:title, :description, :status, :idUser, :isImportant)";
+        // $sql = "INSERT INTO task (title, description, status, idUser, isImportant) VALUES (:title, :description, :status, :idUser, :isImportant)";
 
         $sql = new Insert;
         $sql->setEntity('Task');
@@ -34,8 +34,8 @@ class TaskDao
         $sql->setRowData('description', $task->getDescription());
         $sql->setRowData('status', $task->getStatus());
         $sql->setRowData('isImportant', $task->getImportant());
-        $sql->setRowData('dateStart', 'none');
-        $sql->setRowData('dateEnd', 'none');
+        $sql->setRowData('dateStart', $task->getDateStart());
+        $sql->setRowData('dateEnd', $task->getDateEnd());
         $sql->setRowData('idUser', $task->getIdUser());
         
         try

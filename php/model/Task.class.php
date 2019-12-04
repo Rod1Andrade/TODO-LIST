@@ -12,6 +12,8 @@ class Task{
     private $description;
     private $status;
     private $important;
+    private $dateStart; // Sempre recebe a data atual do sistema
+    private $dateEnd;
     private $idUser; // Id do objeto Usuário
 
     public function setIdTask($idTask){
@@ -59,6 +61,26 @@ class Task{
     }
 
     public function getImportant() { return $this->important; }
+
+    public function setDateStart($dateStart)
+    {
+        $this->dateStart = $dateStart;
+    }
+
+    public function getDateStart()
+    {
+        return $this->dateStart;
+    }
+
+    public function setDateEnd($dateEnd)
+    {
+        $this->dateEnd = $dateEnd;
+    }
+
+    public function getDateEnd()
+    {
+        return $this->dateEnd;
+    }
 
     public function setIdUser($idUser){
         $this->idUser = $idUser;

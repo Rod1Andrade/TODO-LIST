@@ -26,16 +26,22 @@ function createTaskController()
     $task->setDescription($_REQUEST['description']);
     $task->setImportant($important);
     $task->setStatus($_REQUEST['status']);
+    $task->setDateStart($_REQUEST['dateStart']);
+    $task->setDateEnd($_REQUEST['dateEnd']);
     $task->setIdUser($_REQUEST['idUser']);
+
+    // var_dump($_REQUEST);
+    echo '<hr />';
+    var_dump($task);
 
     $taskDao->createTask($task);
 
-    if($task != NULL)
-    {
-        echo "<script type='text/javascript'>";
-        echo "location.href='/TODO-LIST/pages/dashboard.php'";
-        echo "</script>";    
-    }
+    // if($task != NULL)
+    // {
+    //     echo "<script type='text/javascript'>";
+    //     echo "location.href='/TODO-LIST/pages/dashboard.php'";
+    //     echo "</script>";    
+    // }
 
     return false;
 
