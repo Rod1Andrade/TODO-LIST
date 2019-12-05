@@ -40,7 +40,7 @@ class TaskDao
         
         try
         {
-            $statement = $conn->prepare($sql);   
+            $statement = $conn->prepare($sql->getInstruction());   
             $statement->execute();
 
         }

@@ -8,7 +8,7 @@ use php\dao\TaskDao;
 
 function createTaskController()
 {
-    $taskDao = new TaskDao();
+    $taskDao = new TaskDao;
     $task = new Task();
 
     if($_REQUEST['title'] == '' or $_REQUEST['title'] == null)
@@ -35,6 +35,7 @@ function createTaskController()
     var_dump($task);
 
     $taskDao->createTask($task);
+
 
     // if($task != NULL)
     // {
