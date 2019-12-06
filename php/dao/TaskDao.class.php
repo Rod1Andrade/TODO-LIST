@@ -13,6 +13,7 @@ use php\ado\Delete;
 use php\ado\Filter;
 use php\ado\Insert;
 use php\ado\Select;
+use php\ado\Update;
 
 /**
  * @author: Rodrigo Andrade
@@ -160,6 +161,11 @@ class TaskDao
         return $task;
     }
 
+    /**
+     * Deleta elemento pelo ID
+     * @param idTask        = ID da tarefa que vai ser excluir
+     * @throws PDOException = Pode lançar exceções do tipo PDO
+     */
     public function deleteById($idTask)
     {
         $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
@@ -172,8 +178,39 @@ class TaskDao
         $sql->setEntity('Task');
         $sql->setCriteria($Criteria);
 
-        echo $sql->getInstruction();
+        //echo $sql->getInstruction();
 
+        try
+        {
+            $st = $conn->prepare($sql->getInstruction());
+            $st->execute();
+
+            return true; // Sucesso
+        }
+        catch(PDOException $e)
+        {
+            echo 'error: '.$e->getMessage();
+        }finally
+        {
+            Connection::closeConnection();
+        }
+
+        return false; // No sucesso
+    }
+
+    public function concluirById($idTask)
+    {
+        $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
+
+        $sql = new Update;
+        $sql->setEntity('Task');
+
+        $Criteria = new Criteria;
+        $Criteria->add(new Filter('id', '=', $idTask));
+
+        $sql->setRowData('status', 'Concluida');
+        $sql->setCriteria($Criteria);
+        
         try
         {
             $st = $conn->prepare($sql->getInstruction());

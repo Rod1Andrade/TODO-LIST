@@ -111,6 +111,7 @@
                     <?php
                         $tasks = $taskDao->getAll($user);
                         foreach($tasks as $line):
+                            if($line->getStatus() != 'Concluida'):
                     ?>
                     <div class="main-section-task" id="<?=$line->getIdTask()?>">
                             <div class="main-section-task-left-image">
@@ -134,7 +135,7 @@
                         
                             <div class="main-section-task-rigth">
                                 <div class="main-section-task-rigth-concluir">
-                                <a href="?concluir=<?=$line->getIdTask()?>"><img src="../img/carraca.png"></a>
+                                <img src="../img/carraca.png" onclick="concluirAjax(this, <?=$line->getIdTask()?>)">
                                 </div><!--Concluir-->
                                 <div class="main-section-task-rigth-excluir">
                                     <img src="../img/lixeira-excluir.png" onclick="deleteAjax(this, <?=$line->getIdTask()?>)">
@@ -142,6 +143,7 @@
                             </div><!--right-->
                     </div><!--main-section--task-->
                     <?php
+                            endif;
                         endforeach; // Final do Foreach
                     ?>
                 </div><!--element-section-->

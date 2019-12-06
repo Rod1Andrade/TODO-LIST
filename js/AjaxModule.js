@@ -18,6 +18,24 @@ function deleteAjax(context, idTask)
 
 }
 
+function concluirAjax(context, idTask)
+{
+    // Objeto de REQUEST
+    const request = new XMLHttpRequest
+
+    request.onreadystatechange = function()
+    {
+        if(this.status == 200 && this.readyState == 4)
+        {
+            getComponentById(idTask)
+        }
+    }
+
+    request.open('GET', `/TODO-LIST/php/controller/TaskController.php?concluir=${idTask}`, true)
+    request.send()
+
+}
+
 function getComponentById(id)
 {
     const elemt = document.getElementById(id)

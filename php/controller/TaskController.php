@@ -60,6 +60,12 @@ function deleteTask($idTask)
 
 }
 
+function changeToConcluir($idTask)
+{
+    $taskDao = new TaskDao;
+    $taskDao->concluirById($idTask);
+}
+
 /**
  * Usando as funções do Controller
  */
@@ -69,10 +75,15 @@ if(isset($_REQUEST['btn-adcionar-task']))
 {
     createTaskController();
 }
-else if(isset($_REQUEST['delete']))
+elseif(isset($_REQUEST['delete']))
 {
     // deleteTask($_REQUEST[['delete']]);
     $id = $_REQUEST['delete'];
 
     deleteTask($id);
+}
+elseif(isset($_REQUEST['concluir']))
+{
+    $id = $_REQUEST['concluir'];
+    changeToConcluir($id);   
 }
