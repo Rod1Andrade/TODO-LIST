@@ -19,7 +19,10 @@
     $taskDao = new TaskDao;
     $tasks = new Task; // Instância para tarefas
 
-    $userName = "{$user->getName()} {$user->getLastName()}";
+    
+    $firstName = explode(' ', $user->getName());
+
+    $userName = "{$firstName[0]} {$user->getLastName()}";
 
 ?>
 <!DOCTYPE html>

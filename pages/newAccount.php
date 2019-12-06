@@ -26,11 +26,11 @@
                 </div><!--Panel-criar-texto-->
                 <div class="Panel-criar-form">
                     <form action="newAccount-part2.php" method="POST" name="Panel-criar-form">
-                        <input type="text" name="name" class="Panel-criar-field" placeholder="Primeiro Nome">
-                        <input type="text" name="lastName" class="Panel-criar-field" placeholder="Último Nome">
-                        <input type="text" name="nickName" class="Panel-criar-field" placeholder="Nickname">
-                        <input type="mail" name="email" class="Panel-criar-field" placeholder="Email">
-                        <input type="password" name="password" class="Panel-criar-field" placeholder="Senha">
+                        <input type="text" name="name" class="Panel-criar-field" placeholder="Primeiro Nome" required="required">
+                        <input type="text" name="lastName" class="Panel-criar-field" placeholder="Último Nome" required="required">
+                        <input type="text" name="nickName" class="Panel-criar-field" placeholder="Nickname" required="required">
+                        <input type="mail" name="email" class="Panel-criar-field" placeholder="Email" required="required">
+                        <input type="password" name="password" class="Panel-criar-field" placeholder="Senha" required="required">
                         <input type="submit" value="Criar Conta" name="newAccount-btn" class="Panel-login-btn-cn">
                     </form>
                 </div><!--Panel-criar-form-->

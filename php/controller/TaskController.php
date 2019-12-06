@@ -66,6 +66,18 @@ function changeToConcluir($idTask)
     $taskDao->concluirById($idTask);
 }
 
+function changeTittle($idTask, $title)
+{
+    $taskDao = new TaskDao;
+    $taskDao->updateTitleById($idTask, $title);
+}
+
+function changeDesc($idTask, $description)
+{
+    $taskDao = new TaskDao;
+    $taskDao->updateDescById($idTask, $description);
+}
+
 /**
  * Usando as funções do Controller
  */
@@ -75,15 +87,33 @@ if(isset($_REQUEST['btn-adcionar-task']))
 {
     createTaskController();
 }
-elseif(isset($_REQUEST['delete']))
+
+if(isset($_REQUEST['delete']))
 {
     // deleteTask($_REQUEST[['delete']]);
     $id = $_REQUEST['delete'];
 
     deleteTask($id);
+
 }
-elseif(isset($_REQUEST['concluir']))
+if(isset($_REQUEST['concluir']))
 {
     $id = $_REQUEST['concluir'];
     changeToConcluir($id);   
+}
+
+if(isset($_REQUEST['updateTitle']))
+{
+    $idTask =  $_REQUEST['id'];
+    $title  =  $_REQUEST['updateTitle'];
+
+    changeTittle($idTask, $title);
+}
+
+if(isset($_REQUEST['updateDesc']))
+{
+    $idTask =  $_REQUEST['id'];
+    $title  =  $_REQUEST['updateDesc'];
+
+    changeDesc($idTask, $title);
 }

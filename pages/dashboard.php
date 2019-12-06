@@ -19,8 +19,8 @@
     $taskDao = new TaskDao;
     $tasks = new Task; // Instância para tarefas
 
-    $userName = "{$user->getName()} {$user->getLastName()}";
-
+    $firstName = explode(' ', $user->getName());
+    $userName = "{$firstName[0]} {$user->getLastName()}";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -89,13 +89,12 @@
                         <div class="form-task">
                             <form method="POST" action="../php/controller/TaskController.php" name="new-task">
                                 <input type="hidden" name="idUser" value="<?=$user->getId()?>">
-                                <input type="text" name="title" placeholder="Titulo" class="field">
-                                <label class="label-task">Importante: </label><input type="radio" name="important" value="true" class="field-radio"><br>
-                                <label><input type="hidden" name="dateStart" value="<?=date('Y/m/d')?>"></label>
+                                <input type="text" name="title" placeholder="Titulo" class="field" required="required">
+                                <label><input type="hidden" class="field" name="dateStart" value="<?=date('Y/m/d')?>"></label>
                                 <label class="label-task">Data de conclusão: </label><input type="date" min="<?=date('Y/m/d')?>" name="dateEnd">
                                 <input type="hidden" name="status" value="Andamento">
-                                <textarea class="textarea-field" placeholder="Descrição" maxlength="99" name="description"></textarea>
-                                <input type="submit" value="Adicionar" name="btn-adcionar-task" class="task-btn" onclick="hiddenDiv()">
+                                <textarea class="textarea-field" placeholder="Descrição" maxlength="99" name="description" required="required"></textarea>
+                                <input type="submit" value="Adicionar" name="btn-adcionar-task" class="task-btn">
                             </form>
                         </div>
                     </div><!--Container-->
@@ -118,19 +117,15 @@
                                 <img src="../img/favoritos.png">
                             </div><!--left-image-->                        
                             <div class="main-section-task-between">
-                            <a href="?editar=<?=$line->getIdTask()?>">
                                 <div class="main-section-task-between-title">
-                                    <p><?=$line->getTitle()?></p>
+                                    <p contenteditable="true" onblur="updateTitle(this, <?=$line->getIdTask()?>)" id="text-<?=$line->getIdTask()?>"><?=$line->getTitle()?></p>
                                 </div><!--title-->
                                 <div class="main-section-task-between-desc">
-                                    <?php
-                                        if(!empty($line->getDateEnd())):
-                                    ?>
-                                    <p>Data Conclusão: <?=$line->getDateEnd()?></p>
-                                        <?php endif; ?>
-                                    <p><?=$line->getDescription()?></p>
+                                    <?php if(!empty($line->getDateEnd())): ?>
+                                        <p>Data Conclusão: <span><?=$line->getDateEnd()?></span></p>
+                                    <?php endif; ?>
+                                    <p contenteditable="true" onblur="updateDesc(this, <?=$line->getIdTask()?>)" id="desc-<?=$line->getIdTask()?>"><?=$line->getDescription()?></p>
                                 </div><!--desc-->
-                            </a><!-- Fim link de editar -->
                             </div><!--between-->
                         
                             <div class="main-section-task-rigth">

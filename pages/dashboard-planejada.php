@@ -19,7 +19,9 @@
     $taskDao = new TaskDao;
     $tasks = new Task; // Instância para tarefas
 
-    $userName = "{$user->getName()} {$user->getLastName()}";
+    $firstName = explode(' ', $user->getName());
+
+    $userName = "{$firstName[0]} {$user->getLastName()}";
 
 ?>
 <!DOCTYPE html>
@@ -59,7 +61,7 @@
                     
                     -->
 
-                    <a href="dashboard-planejadas.php">
+                    <a href="dashboard-planejada.php">
                         <div class="menu-content">
                             <img src="../img/calendario-main.png">
                             <p>Planejadas</p>
@@ -90,34 +92,30 @@
                     <?php
                         $tasks = $taskDao->getAll($user);
                         foreach($tasks as $line):
-                            if(!empty($line->getDateEnd())):
+                            if(!empty($line->getDateEnd()) && $line->getStatus() != 'Concluida'):
                     ?>
-                    <div class="main-section-task">
+                    <div class="main-section-task" id="<?=$line->getIdTask()?>">
                             <div class="main-section-task-left-image">
                                 <img src="../img/favoritos.png">
                             </div><!--left-image-->                        
                             <div class="main-section-task-between">
-                            <a href="?editar=<?=$line->getIdTask()?>">
                                 <div class="main-section-task-between-title">
-                                    <p><?=$line->getTitle()?></p>
+                                    <p contenteditable="true" onblur="updateTitle(this, <?=$line->getIdTask()?>)" id="text-<?=$line->getIdTask()?>"><?=$line->getTitle()?></p>
                                 </div><!--title-->
                                 <div class="main-section-task-between-desc">
-                                    <?php
-                                        if(!empty($line->getDateEnd())):
-                                    ?>
-                                    <p>Data Conclusão: <?=$line->getDateEnd()?></p>
-                                        <?php endif; ?>
-                                    <p><?=$line->getDescription()?></p>
+                                    <?php if(!empty($line->getDateEnd())): ?>
+                                        <p>Data Conclusão: <span><?=$line->getDateEnd()?></span></p>
+                                    <?php endif; ?>
+                                    <p contenteditable="true" onblur="updateDesc(this, <?=$line->getIdTask()?>)" id="desc-<?=$line->getIdTask()?>"><?=$line->getDescription()?></p>
                                 </div><!--desc-->
-                            </a><!-- Fim link de editar -->
                             </div><!--between-->
                         
                             <div class="main-section-task-rigth">
                                 <div class="main-section-task-rigth-concluir">
-                                <a href="?concluir=<?=$line->getIdTask()?>"><img src="../img/carraca.png"></a>
+                                <img src="../img/carraca.png" onclick="concluirAjax(this, <?=$line->getIdTask()?>)">
                                 </div><!--Concluir-->
                                 <div class="main-section-task-rigth-excluir">
-                                    <a href="?delete=<?=$line->getIdTask()?>"><img src="../img/lixeira-excluir.png"></a>
+                                    <img src="../img/lixeira-excluir.png" onclick="deleteAjax(this, <?=$line->getIdTask()?>)">
                                 </div><!--Excluir-->
                             </div><!--right-->
                     </div><!--main-section--task-->
@@ -131,6 +129,7 @@
     </div>
 
     <script src="../js/dashboard-dom.js"></script>
-
+    <script src="../js/AjaxModule.js"></script>
+    
 </body>
 </html>

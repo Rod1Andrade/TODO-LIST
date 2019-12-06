@@ -81,6 +81,7 @@ class TaskDao
         $sql->setEntity('Task');
         $sql->addColumn('*');
 
+        
         $Criteria->add(new Filter('idUser', '=', $user->getId()));
         $sql->setCriteria($Criteria);
 
@@ -196,6 +197,74 @@ class TaskDao
         }
 
         return false; // No sucesso
+    }
+
+    public function updateTitleById($idTask, $title)
+    {
+        $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
+        
+        $sql = new Update;
+        $Criteria = new Criteria;
+
+        $sql->setEntity('Task');
+        $sql->setRowData('title', $title);
+
+        $Criteria->add(new Filter('id', '=', $idTask));
+
+        $sql->setCriteria($Criteria);
+
+       // echo $sql->getInstruction();
+
+        try
+        {
+            $st = $conn->prepare($sql->getInstruction());
+            $st->execute();
+
+            return true; // Sucesso
+        }
+        catch(PDOException $e)
+        {
+            echo 'error: '.$e->getMessage();
+        }finally
+        {
+            Connection::closeConnection();
+        }
+
+        return false; // No sucesso
+    }
+
+    public function updateDescById($idTask, $description)
+    {
+        $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
+        
+        $sql = new Update;
+        $Criteria = new Criteria;
+
+        $sql->setEntity('Task');
+        $sql->setRowData('description', $description);
+
+        $Criteria->add(new Filter('id', '=', $idTask));
+
+        $sql->setCriteria($Criteria);
+
+       // echo $sql->getInstruction();
+
+        try
+        {
+            $st = $conn->prepare($sql->getInstruction());
+            $st->execute();
+
+            return true; // Sucesso
+        }
+        catch(PDOException $e)
+        {
+            echo 'error: '.$e->getMessage();
+        }finally
+        {
+            Connection::closeConnection();
+        }
+
+        return false; // No sucesso   
     }
 
     public function concluirById($idTask)
