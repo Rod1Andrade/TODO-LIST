@@ -52,10 +52,27 @@ function createTaskController()
 
 }
 
+function deleteTask($idTask)
+{
+    $taskDao = new TaskDao;
+    
+    $taskDao->deleteById($idTask);
 
+}
 
 /**
  * Usando as funções do Controller
  */
 
-createTaskController();
+
+if(isset($_REQUEST['btn-adcionar-task']))
+{
+    createTaskController();
+}
+else if(isset($_REQUEST['delete']))
+{
+    // deleteTask($_REQUEST[['delete']]);
+    $id = $_REQUEST['delete'];
+
+    deleteTask($id);
+}

@@ -9,7 +9,7 @@
 <body>
 
     <a href="pages/login.php">Login</a><br>
-    <a href="pages/dashboard.php">Dashboard</a>
+    <a href="pages/newAccount.php">Criar Conta</a>
     
 </body>
 </html>

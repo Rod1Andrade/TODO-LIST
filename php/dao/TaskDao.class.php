@@ -9,6 +9,7 @@ use php\model\Task;
 use PDO;
 use PDOException;
 use php\ado\Criteria;
+use php\ado\Delete;
 use php\ado\Filter;
 use php\ado\Insert;
 use php\ado\Select;
@@ -157,6 +158,38 @@ class TaskDao
         }
 
         return $task;
+    }
+
+    public function deleteById($idTask)
+    {
+        $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
+
+        $sql = new Delete;
+        
+        $Criteria = new Criteria;
+        $Criteria->add(new Filter('id', '=', $idTask));
+        
+        $sql->setEntity('Task');
+        $sql->setCriteria($Criteria);
+
+        echo $sql->getInstruction();
+
+        try
+        {
+            $st = $conn->prepare($sql->getInstruction());
+            $st->execute();
+
+            return true; // Sucesso
+        }
+        catch(PDOException $e)
+        {
+            echo 'error: '.$e->getMessage();
+        }finally
+        {
+            Connection::closeConnection();
+        }
+
+        return false; // No sucesso
     }
 
 }

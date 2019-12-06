@@ -112,7 +112,7 @@
                         $tasks = $taskDao->getAll($user);
                         foreach($tasks as $line):
                     ?>
-                    <div class="main-section-task">
+                    <div class="main-section-task" id="<?=$line->getIdTask()?>">
                             <div class="main-section-task-left-image">
                                 <img src="../img/favoritos.png">
                             </div><!--left-image-->                        
@@ -137,7 +137,7 @@
                                 <a href="?concluir=<?=$line->getIdTask()?>"><img src="../img/carraca.png"></a>
                                 </div><!--Concluir-->
                                 <div class="main-section-task-rigth-excluir">
-                                    <a href="?delete=<?=$line->getIdTask()?>"><img src="../img/lixeira-excluir.png"></a>
+                                    <img src="../img/lixeira-excluir.png" onclick="deleteAjax(this, <?=$line->getIdTask()?>)">
                                 </div><!--Excluir-->
                             </div><!--right-->
                     </div><!--main-section--task-->
@@ -150,6 +150,7 @@
     </div>
 
     <script src="../js/dashboard-dom.js"></script>
+    <script src="../js/AjaxModule.js"></script>
 
 </body>
 </html>
