@@ -80,6 +80,7 @@ class TaskDao
         $sql->addColumn('*');
 
         $Criteria->add(new Filter('idUser', '=', $user->getId()));
+        $sql->setCriteria($Criteria);
 
         try 
         {
