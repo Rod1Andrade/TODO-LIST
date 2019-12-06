@@ -59,7 +59,7 @@
                     
                     -->
 
-                    <a href="dashboard-planejadas.php">
+                    <a href="dashboard-planejada.php">
                         <div class="menu-content">
                             <img src="../img/calendario-main.png">
                             <p>Planejadas</p>
@@ -72,6 +72,7 @@
                             <p>Concluidas</p>
                         </div>
                     </a>
+
                     <div class="menu-content">
                         <img src="../img/sair.png">
                         <p><a href="../php/controller/LogoutController.php">Logout</a></p>
@@ -83,14 +84,14 @@
 
         <div class="main-rigth">
             <div id="header">
-                <div class="header-title"><p>Tarefas Planejadas</p></div><!--Title-->    
+                <div class="header-title"><p>Tarefas Concluídas</p></div><!--Title-->    
             </div><!--Header-->
             <div id="main-section">        
                 <div id="element-section">
                     <?php
                         $tasks = $taskDao->getAll($user);
                         foreach($tasks as $line):
-                            if(!empty($line->getDateEnd())):
+                            if($line->getStatus() == 'Concluida'):
                     ?>
                     <div class="main-section-task">
                             <div class="main-section-task-left-image">

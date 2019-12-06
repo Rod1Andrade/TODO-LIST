@@ -64,11 +64,12 @@
                         </div>
                     </a>
 
-                    <div class="menu-content">
-                        <img src="../img/folder.png">
-                        <p>Concluidas</p>
-                    </div>
-
+                    <a href="dashboard-concluidas.php">
+                        <div class="menu-content">
+                            <img src="../img/folder.png">
+                            <p>Concluidas</p>
+                        </div>
+                    </a>
                     <div class="menu-content">
                         <img src="../img/sair.png">
                         <p><a href="../php/controller/LogoutController.php">Logout</a></p>
