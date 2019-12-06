@@ -4,7 +4,7 @@ include_once '/var/www/html/TODO-LIST/configs/autoload.php';
 
 use php\model\Task;
 use php\dao\TaskDao;
-
+use php\model\User;
 
 function createTaskController()
 {
@@ -27,26 +27,31 @@ function createTaskController()
     $task->setImportant($important);
     $task->setStatus($_REQUEST['status']);
     $task->setDateStart($_REQUEST['dateStart']);
-    $task->setDateEnd($_REQUEST['dateEnd']);
+
+    $dateEnd = $_REQUEST['dateEnd'] ? $_REQUEST['dateEnd'] : null;
+
+    $task->setDateEnd($dateEnd);
     $task->setIdUser($_REQUEST['idUser']);
 
     // var_dump($_REQUEST);
-    echo '<hr />';
-    var_dump($task);
+    // echo '<hr />';
+    // var_dump($task);
 
     $taskDao->createTask($task);
 
+    // var_dump($taskDao);
 
-    // if($task != NULL)
-    // {
-    //     echo "<script type='text/javascript'>";
-    //     echo "location.href='/TODO-LIST/pages/dashboard.php'";
-    //     echo "</script>";    
-    // }
+    if($task != NULL)
+    {
+        echo "<script type='text/javascript'>";
+        echo "location.href='/TODO-LIST/pages/dashboard.php'";
+        echo "</script>";    
+    }
 
     return false;
 
 }
+
 
 
 /**

@@ -23,12 +23,7 @@ class Task{
     public function getIdTask(){ return $this->idTask; }
 
     public function setTitle($title){
-
-        if(strlen($title) <= 50){
-            $this->title = $title;
-        }else{
-            // Lançar Exceção posteriormente
-        }
+        $this->title = $title;
     }
 
     public function getTitle() { return $this->title; }

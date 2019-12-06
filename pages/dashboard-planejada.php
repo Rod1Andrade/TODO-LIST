@@ -32,7 +32,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>TODO-LIST</title>
 </head>
-<body onload="hiddenDiv()">
+<body>
 
     <div id="dash-container">
         <div class="menu-left">
@@ -44,10 +44,12 @@
                     <p><?=$userName?></p>
                 </div><!--infos-pessoais--nome-->
                 <div class="menu">
-                    <div class="menu-content">
+                    <a href="dashboard.php">
+                        <div class="menu-content">
                         <img src="../img/verificado.png">
-                        <p>Tarefas</p>
-                    </div>
+                            <p>Tarefas</p>
+                        </div>
+                    </a>
                     <!--
 
                     <div class="menu-content">
@@ -57,13 +59,10 @@
                     
                     -->
 
-                    <a href="dashboard-planejada.php">
-                        <div class="menu-content">
-                            <img src="../img/calendario-main.png">
-                            <p>Planejadas</p>
-                        </div>
-                    </a>
-
+                    <div class="menu-content">
+                        <img src="../img/calendario-main.png">
+                        <p>Planejadas</p>
+                    </div>
                     <div class="menu-content">
                         <img src="../img/folder.png">
                         <p>Concluidas</p>
@@ -79,37 +78,15 @@
 
 
         <div class="main-rigth">
-                <div id="container-newTask">
-                        <div id="NewTask-space">
-                            <div class="task-title"><p>Adcionar Tarefa</p></div><!--task-title-->
-                            <div class="close-btn" onclick="hiddenDiv()"><img src="../img/close.png"></div><!--close-btn-->
-                        </div><!--NewTask-space-->
-                        <hr />
-                        <div class="form-task">
-                            <form method="POST" action="../php/controller/TaskController.php" name="new-task">
-                                <input type="hidden" name="idUser" value="<?=$user->getId()?>">
-                                <input type="text" name="title" placeholder="Titulo" class="field">
-                                <label class="label-task">Importante: </label><input type="radio" name="important" value="true" class="field-radio"><br>
-                                <label><input type="hidden" name="dateStart" value="<?=date('Y/m/d')?>"></label>
-                                <label class="label-task">Data de conclusão: </label><input type="date" min="<?=date('Y/m/d')?>" name="dateEnd">
-                                <input type="hidden" name="status" value="Andamento">
-                                <textarea class="textarea-field" placeholder="Descrição" maxlength="99" name="description"></textarea>
-                                <input type="submit" value="Adicionar" name="btn-adcionar-task" class="task-btn" onclick="hiddenDiv()">
-                            </form>
-                        </div>
-                    </div><!--Container-->
-            
             <div id="header">
-                <div class="header-title"><p>Tarefas</p></div><!--Title-->    
-                <div class="header-btn">
-                    <button class="header-btn-task" onclick="createNewTask()">Nova Tarefa</button>
-                </div><!--Header--btrn-->
+                <div class="header-title"><p>Tarefas Planejadas</p></div><!--Title-->    
             </div><!--Header-->
             <div id="main-section">        
                 <div id="element-section">
                     <?php
                         $tasks = $taskDao->getAll($user);
                         foreach($tasks as $line):
+                            if(!empty($line->getDateEnd())):
                     ?>
                     <div class="main-section-task">
                             <div class="main-section-task-left-image">
@@ -141,6 +118,7 @@
                             </div><!--right-->
                     </div><!--main-section--task-->
                     <?php
+                            endif;
                         endforeach; // Final do Foreach
                     ?>
                 </div><!--element-section-->

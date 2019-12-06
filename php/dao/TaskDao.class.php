@@ -8,7 +8,10 @@ use php\model\Task;
 
 use PDO;
 use PDOException;
+use php\ado\Criteria;
+use php\ado\Filter;
 use php\ado\Insert;
+use php\ado\Select;
 
 /**
  * @author: Rodrigo Andrade
@@ -38,6 +41,8 @@ class TaskDao
         $sql->setRowData('dateEnd', $task->getDateEnd());
         $sql->setRowData('idUser', $task->getIdUser());
         
+        // echo $sql->getInstruction();
+
         try
         {
             $statement = $conn->prepare($sql->getInstruction());   
@@ -63,37 +68,43 @@ class TaskDao
 
         $tasks = array();
 
-        $conn = Connection::open('../../configs/DB.ini');
-        $sql = "SELECT * from task WHERE idUser = :idUser";
+        // print_r($user);
 
-        try
+        $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
+        // $sql = "SELECT * from task WHERE idUser = :idUser";
+
+        $sql = new Select;
+        $Criteria = new Criteria;
+
+        $sql->setEntity('Task');
+        $sql->addColumn('*');
+
+        $Criteria->add(new Filter('idUser', '=', $user->getId()));
+
+        try 
         {
+            $st = $conn->prepare($sql->getInstruction());
+            $st->execute();
 
-            $statement = $conn->prepare($sql);
+            $result = $st->fetchAll(PDO::FETCH_ASSOC);
 
-            $idUser = $user->getId();
+            // var_dump($result);
+            
+            foreach($result as $value)
+            {
+                // var_dump($value);
+                $task = new Task;
 
-            $statement->bindParam(':idUser', $idUser);
-            $statement->execute();
+                $task->setIdTask($value['id']);
+                $task->setTitle($value['title']);
+                $task->setDescription($value['description']);
+                $task->setStatus($value['status']);
+                $task->setImportant($value['isImportant']);
+                $task->setDateStart($value['dateStart']);
+                $task->setDateEnd($value['dateEnd']);
+                $task->setIdUser($value['idUser']);
 
-            $statement->setFetchMode(PDO::FETCH_ASSOC);
-
-            $result = $statement->fetchAll();
-
-            //print_r($result);
-
-            foreach($result as $line){
-                $task = new Task();
-
-                $task->setIdTask($line["idTask"]);
-                $task->setTitle($line["title"]);
-                $task->setDescription(($line["description"]));
-                $task->setStatus($line["status"]);
-                $task->setIdUser($line["idUser"]);
-                $task->setImportant($line["isImportant"]);
-
-                array_push($tasks, $task);
-
+                $tasks[] = $task;
             }
 
         }
@@ -117,7 +128,7 @@ class TaskDao
     public function getTaskById($idTask, User $user)
     {
 
-        $conn = Connection::open('../../configs/DB.ini');
+        $conn = Connection::open('/var/www/html/TODO-LIST/configs/DB.ini');
         $sql = "SELECT title, description FROM task WHERE idTask = :idTask AND idUser = :idUser";
 
         $task = new Task();
