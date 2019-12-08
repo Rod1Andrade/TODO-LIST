@@ -1,9 +1,4 @@
----
--- @author: Rodrigo Moreira Pires de Andrade
--- MDL do banco de dados
----
-
-CREATE DATABASE IF NOT EXISTS todolist;
+CREATE DATABASE todolist;
 
 USE todolist;
 

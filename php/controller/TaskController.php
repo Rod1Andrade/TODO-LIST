@@ -9,7 +9,7 @@ use php\model\User;
 function createTaskController()
 {
     $taskDao = new TaskDao;
-    $task = new Task();
+    $task = new Task;
 
     if($_REQUEST['title'] == '' or $_REQUEST['title'] == null)
     {   

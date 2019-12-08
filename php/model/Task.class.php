@@ -29,12 +29,7 @@ class Task{
     public function getTitle() { return $this->title; }
 
     public function setDescription($description){
-
-        if(strlen($description) <= 100){
-            $this->description = $description;
-        }else{
-            // TODO: Lançar Exceção
-        }
+        $this->description = $description;
 
     }
 
